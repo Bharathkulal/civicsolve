@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CivicSolve - Register</title>
+
+<link rel="stylesheet" href="assets/css/register.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="auth-page">
+<main class="auth-layout">
+    <section class="register-pane">
+        <h1>Civic Solve</h1>
+        <p class="subtitle">Register for Civic Solve</p>
+
+        <div id="register-error" class="alert" style="display:none;"></div>
+        <div id="register-success" class="alert alert-success" style="display:none;"></div>
+
+        <form id="register-form">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+
+            <div class="password-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <span onclick="togglePassword()" class="toggle-password">👁</span>
+            </div>
+
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <button type="submit">Create My Civic Solve Account</button>
+        </form>
+
+        <p class="auth-link">
+            Already have an account? <a href="login.html">Log in</a>
+        </p>
+    </section>
+
+    <section class="hero-pane">
+        <div class="hero-overlay">
+            <h2>Shape your city's future. Get started today and make a difference in your community.</h2>
+            <p>Connect with neighbors, share ideas, and drive change.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+function togglePassword(){
+    let p = document.getElementById("password");
+    p.type = p.type === "password" ? "text" : "password";
+}
+</script>
+<script src="assets/js/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicSolve - Login</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <main class="auth-scene">
+        <section class="hero-pane">
+            <div class="hero-overlay">
+                <h2>Shape your city's future. Join the conversation and make a difference in your community.</h2>
+                <p>Connect with neighbors, share ideas, and drive change.</p>
+            </div>
+        </section>
+
+        <section class="login-pane">
+            <div class="brand-wrap">
+                <div class="brand-mark">C</div>
+                <h1>Civic Solve</h1>
+                <p>Empowering communities, one solution at a time.</p>
+            </div>
+
+            <div id="login-error" class="alert" style="display:none;"></div>
+
+            <form id="login-form" class="login-form">
+                <label class="input-wrap">
+                    <span class="input-icon">✉</span>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </label>
+
+                <label class="input-wrap">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" name="password" placeholder="Password" required>
+                </label>
+
+                <div class="helper-row">
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+
+            <div class="divider">Or log in with</div>
+
+            <div class="social-row">
+                <button type="button" aria-label="Login with Google">G</button>
+                <button type="button" aria-label="Login with Facebook">f</button>
+                <button type="button" aria-label="Login with eID">eID</button>
+            </div>
+
+            <p class="auth-link">Don't have an account? <a href="register.html">Sign Up.</a></p>
+        </section>
+    </main>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>

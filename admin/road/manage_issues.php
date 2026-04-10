@@ -1,0 +1,59 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin' || $_SESSION['department'] !== 'road') {
+    header('Location: ../../../login.html');
+    exit;
+}
+require_once __DIR__ . '/../../backend/config/db.php';
+$dept = 'road';
+$complaints = $pdo->prepare("SELECT c.*, u.name as user_name FROM complaints c LEFT JOIN users u ON c.user_id = u.id WHERE c.department = ? ORDER BY c.created_at DESC");
+$complaints->execute([$dept]);
+$complaints = $complaints->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Issues - CivicSolve</title>
+    <link rel="stylesheet" href="../admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar admin-nav dept-road">
+        <div class="container">
+            <a href="home.php" class="logo">CivicSolve <span class="badge-dept">ROAD DEPT</span></a>
+            <div class="nav-links">
+                <a href="home.php">Dashboard</a>
+                <a href="dashboard.php">Analytics</a>
+                <a href="manage_issues.php">Issues</a>
+                <a href="update_status.php">Update Status</a>
+                <a href="../../../backend/auth/logout.php" class="btn-nav">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="admin-dashboard">
+        <div class="container">
+            <h1>Manage Road Issues</h1>
+            <table class="admin-table">
+                <thead>
+                    <tr><th>ID</th><th>User</th><th>Title</th><th>Description</th><th>Priority</th><th>Status</th><th>Date</th></tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($complaints as $c): ?>
+                    <tr>
+                        <td>#<?php echo $c['id']; ?></td>
+                        <td><?php echo htmlspecialchars($c['user_name']); ?></td>
+                        <td><?php echo htmlspecialchars($c['title']); ?></td>
+                        <td><?php echo htmlspecialchars(substr($c['description'], 0, 40)); ?>...</td>
+                        <td><span class="badge priority-<?php echo $c['priority']; ?>"><?php echo ucfirst($c['priority']); ?></span></td>
+                        <td><span class="badge status-<?php echo $c['status']; ?>"><?php echo ucfirst(str_replace('_', ' ', $c['status'])); ?></span></td>
+                        <td><?php echo date('d M Y', strtotime($c['created_at'])); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --dark: #1f2937;
+    --light: #f3f4f6;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --road: #f97316;
+    --garbage: #22c55e;
+    --water: #3b82f6;
+    --electricity: #eab308;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar {
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar.admin-nav.dept-road { background: linear-gradient(135deg, var(--road) 0%, #ea580c 100%); }
+.navbar.admin-nav.dept-garbage { background: linear-gradient(135deg, var(--garbage) 0%, #16a34a 100%); }
+.navbar.admin-nav.dept-water { background: linear-gradient(135deg, var(--water) 0%, #1d4ed8 100%); }
+.navbar.admin-nav.dept-electricity { background: linear-gradient(135deg, #eab308 0%, #a16207 100%); }
+.navbar.admin-nav.dept-super { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); }
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.logo .badge-dept {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    background: rgba(255,255,255,0.2);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.btn-nav {
+    background: var(--white);
+    color: var(--primary) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.admin-dashboard {
+    padding: 100px 0 40px;
+    min-height: 100vh;
+}
+
+.admin-dashboard h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--dark);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.stat-card.resolved .stat-number {
+    color: var(--secondary);
+}
+
+.stat-card.high .stat-number {
+    color: var(--danger);
+}
+
+.stat-card.high {
+    background: #fef2f2;
+}
+
+.stat-item {
+    text-align: center;
+    color: var(--white);
+}
+
+.stat-item .stat-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.stat-item .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge.dept-road { background: #ffedd5; color: var(--road); }
+.badge.dept-garbage { background: #dcfce7; color: var(--garbage); }
+.badge.dept-water { background: #dbeafe; color: var(--water); }
+.badge.dept-electricity { background: #fef9c3; color: #a16207; }
+
+.badge.priority-high { background: #fee2e2; color: var(--danger); }
+.badge.priority-medium { background: #fef3c7; color: var(--warning); }
+.badge.priority-low { background: #d1fae5; color: var(--secondary); }
+
+.badge.status-pending { background: #fef3c7; color: var(--warning); }
+.badge.status-in_progress { background: #dbeafe; color: #2563eb; }
+.badge.status-resolved { background: #d1fae5; color: var(--secondary); }
+
+.admin-table, .complaints-table table {
+    width: 100%;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.admin-table th, .complaints-table th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.admin-table td, .complaints-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-table tr:hover, .complaints-table tr:hover {
+    background: #f9fafb;
+}
+
+.update-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.update-form select {
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.btn-small:hover {
+    background: var(--primary-dark);
+}
+
+.btn-danger {
+    background: var(--danger);
+}
+
+.dept-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dept-card {
+    padding: 1.5rem;
+    border-radius: 15px;
+    background: var(--white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.dept-card.dept-road { border-left: 4px solid var(--road); }
+.dept-card.dept-garbage { border-left: 4px solid var(--garbage); }
+.dept-card.dept-water { border-left: 4px solid var(--water); }
+.dept-card.dept-electricity { border-left: 4px solid var(--electricity); }
+
+.dept-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.dept-stat {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray);
+}
+
+.add-admin-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.add-admin-form form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+.add-admin-form input,
+.add-admin-form select {
+    padding: 0.8rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.add-admin-form button {
+    height: 45px;
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .admin-table {
+        font-size: 0.85rem;
+    }
+    
+    .update-form {
+        flex-direction: column;
+    }
+}
