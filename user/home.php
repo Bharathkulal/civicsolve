@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../login.html');
+    header('Location: ../login.html');
     exit;
 }
 include("../backend/config/db.php");
@@ -31,6 +31,7 @@ while ($row = $result->fetch_assoc()) {
                 <a href="home.php">Dashboard</a>
                 <a href="submit_issue.php">Submit Issue</a>
                 <a href="view_status.php">My Complaints</a>
+                <a href="profile.php">Profile</a>
                 <span class="user-name"><?php echo $_SESSION['name']; ?></span>
                 <a href="../backend/auth/logout.php" class="btn-nav">Logout</a>
             </div>
@@ -41,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
         <div class="container">
             <h1>Welcome, <?php echo $_SESSION['name']; ?> 👋</h1>
             <div class="dashboard-grid">
-                <div class="card action-card">
+                <div class="card action-card featured-report-card">
                     <h2>Submit New Issue</h2>
                     <p>Report a civic problem with photo and AI will classify it automatically.</p>
                     <a href="submit_issue.php" class="btn-primary">Report Issue</a>
@@ -50,6 +51,11 @@ while ($row = $result->fetch_assoc()) {
                     <h2>My Complaints</h2>
                     <p>Track status of your submitted complaints.</p>
                     <a href="view_status.php" class="btn-secondary">View All</a>
+                </div>
+                <div class="card">
+                    <h2>Profile</h2>
+                    <p>Create and update your profile details and picture.</p>
+                    <a href="profile.php" class="btn-secondary">Open Profile</a>
                 </div>
             </div>
 

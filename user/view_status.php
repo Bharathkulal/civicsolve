@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../login.html');
+    header('Location: ../login.html');
     exit;
 }
 include("../backend/config/db.php");
@@ -27,6 +27,7 @@ $result = $conn->query($sql);
                 <a href="home.php">Dashboard</a>
                 <a href="submit_issue.php">Submit Issue</a>
                 <a href="view_status.php">My Complaints</a>
+                <a href="profile.php">Profile</a>
                 <a href="../backend/auth/logout.php" class="btn-nav">Logout</a>
             </div>
         </div>

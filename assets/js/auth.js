@@ -16,6 +16,8 @@ function showSuccess(elementId, message) {
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
+    const params = new URLSearchParams(window.location.search);
+    const nextPath = params.get('next');
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
@@ -35,7 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 
                 if (result.success) {
-                    window.location.href = result.redirect;
+                    if (nextPath && result.redirect === 'user/home.php') {
+                        window.location.href = nextPath;
+                    } else {
+                        window.location.href = result.redirect;
+                    }
                 } else {
                     showError('login-error', result.message || 'Invalid credentials');
                 }
