@@ -6,54 +6,101 @@
     <title>CivicSolve - Login</title>
     <link rel="stylesheet" href="assets/css/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="auth-page">
-    <main class="auth-scene">
-        <section class="hero-pane">
-            <div class="hero-content">
-                <h2>Shape your city's future.<br>Join the conversation and make<br>a difference in your community.</h2>
-                <p>Connect with neighbors, share ideas, and drive change.</p>
+<body>
+    <div class="login-container">
+        <!-- Left Section - Desktop Only -->
+        <div class="left-section">
+            <div class="left-content">
+                <div class="logo-large">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+                <h2>Shape Your City's Future</h2>
+                <p>Join the conversation and make a difference in your community</p>
+                <p class="subtitle">Connect with neighbors, share ideas, and drive real change</p>
             </div>
-        </section>
+        </div>
 
-        <section class="login-pane">
-            <div class="brand-wrap">
-                <h1><span>Civic</span> Solve</h1>
-                <p>Empowering communities, one solution at a time.</p>
-            </div>
-
-            <div id="login-error" class="alert" style="display:none;"></div>
-
-            <form id="login-form" class="login-form">
-                <label class="input-wrap">
-                    <span class="input-icon">✉</span>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                </label>
-
-                <label class="input-wrap">
-                    <span class="input-icon">🔒</span>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <span class="input-icon input-icon-end">◔</span>
-                </label>
-
-                <div class="helper-row">
-                    <a href="#" class="forgot-link">Forgot Password?</a>
+        <!-- Right Section - Login Form -->
+        <div class="right-section">
+            <div class="login-form-wrapper">
+                <!-- Header -->
+                <div class="login-header">
+                    <div class="logo-small">
+                        <span class="logo-text">CIVICSOLVE</span>
+                    </div>
+                    <h1>Welcome!</h1>
+                    <p>Sign in to your account</p>
                 </div>
 
-                <button type="submit" class="login-btn">Log In</button>
-            </form>
+                <!-- Error Message -->
+                <div id="login-error" class="alert alert-error" style="display:none;"></div>
 
-            <div class="divider">Or log in with</div>
+                <!-- Login Form -->
+                <form id="login-form" class="form">
+                    <div class="form-group">
+                        <label for="email">Email Address or Mobile Number</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input 
+                                type="email" 
+                                id="email"
+                                name="email" 
+                                placeholder="Enter email or phone" 
+                                required
+                            >
+                        </div>
+                    </div>
 
-            <div class="social-row">
-                <button type="button" class="google" aria-label="Login with Google">G</button>
-                <button type="button" class="facebook" aria-label="Login with Facebook">f</button>
-                <button type="button" aria-label="Login with eID">eID</button>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input 
+                                type="password" 
+                                id="password"
+                                name="password" 
+                                placeholder="Enter password" 
+                                required
+                            >
+                            <span class="toggle-password" onclick="togglePassword()">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+
+                <!-- Sign Up Link -->
+                <div class="signup-link">
+                    <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <p class="auth-link">Don't have an account? <a href="register.html">Sign Up.</a></p>
-        </section>
-    </main>
     <script src="assets/js/auth.js"></script>
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.querySelector('.toggle-password i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>

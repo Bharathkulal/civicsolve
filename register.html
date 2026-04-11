@@ -1,57 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CivicSolve - Register</title>
-
-<link rel="stylesheet" href="assets/css/register.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicSolve - Register</title>
+    <link rel="stylesheet" href="assets/css/register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
-<body class="auth-page">
-<main class="auth-layout">
-    <section class="register-pane">
-        <h1>Civic Solve</h1>
-        <p class="subtitle">Register for Civic Solve</p>
-
-        <div id="register-error" class="alert" style="display:none;"></div>
-        <div id="register-success" class="alert alert-success" style="display:none;"></div>
-
-        <form id="register-form">
-            <input type="text" name="name" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-
-            <div class="password-group">
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <span onclick="togglePassword()" class="toggle-password">👁</span>
+<body>
+    <div class="register-container">
+        <!-- Left Section - Desktop Only -->
+        <div class="left-section">
+            <div class="left-content">
+                <div class="logo-large">
+                    <i class="fas fa-city"></i>
+                </div>
+                <h2>Join Our Community</h2>
+                <p>Be part of a growing movement to shape your city's future</p>
+                <p class="subtitle">Share your ideas, connect with neighbors, and drive meaningful change</p>
             </div>
-
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-            <button type="submit">Create My Civic Solve Account</button>
-        </form>
-
-        <p class="auth-link">
-            Already have an account? <a href="login.html">Log in</a>
-        </p>
-    </section>
-
-    <section class="hero-pane">
-        <div class="hero-overlay">
-            <h2>Shape your city's future. Get started today and make a difference in your community.</h2>
-            <p>Connect with neighbors, share ideas, and drive change.</p>
         </div>
-    </section>
-</main>
 
-<script>
-function togglePassword(){
-    let p = document.getElementById("password");
-    p.type = p.type === "password" ? "text" : "password";
-}
-</script>
-<script src="assets/js/auth.js"></script>
+        <!-- Right Section - Register Form -->
+        <div class="right-section">
+            <div class="register-form-wrapper">
+                <!-- Header -->
+                <div class="register-header">
+                    <div class="logo-small">
+                        <span class="logo-text">CIVICSOLVE</span>
+                    </div>
+                    <h1>Create Account</h1>
+                    <p>Join thousands shaping their communities</p>
+                </div>
 
+                <!-- Error/Success Messages -->
+                <div id="register-error" class="alert alert-error" style="display:none;"></div>
+                <div id="register-success" class="alert alert-success" style="display:none;"></div>
+
+                <!-- Register Form -->
+                <form id="register-form" class="form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input 
+                                type="text" 
+                                id="name"
+                                name="name" 
+                                placeholder="Enter your full name" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input 
+                                type="email" 
+                                id="email"
+                                name="email" 
+                                placeholder="Enter your email" 
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input 
+                                type="password" 
+                                id="password"
+                                name="password" 
+                                placeholder="Create a password" 
+                                required
+                            >
+                            <span class="toggle-password" onclick="togglePassword('password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input 
+                                type="password" 
+                                id="confirm_password"
+                                name="confirm_password" 
+                                placeholder="Confirm your password" 
+                                required
+                            >
+                            <span class="toggle-password" onclick="togglePassword('confirm_password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" class="terms-label">
+                            I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+
+                <!-- Login Link -->
+                <div class="login-link">
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script>
+        function togglePassword(fieldId) {
+            const input = document.getElementById(fieldId);
+            const icon = input.nextElementSibling.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>

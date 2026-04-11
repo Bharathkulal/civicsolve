@@ -18,8 +18,18 @@ CREATE TABLE IF NOT EXISTS complaints (
     title VARCHAR(200),
     department VARCHAR(100),
     description TEXT,
+    image_path VARCHAR(500) DEFAULT NULL,
+    latitude DECIMAL(10,6) DEFAULT NULL,
+    longitude DECIMAL(10,6) DEFAULT NULL,
+    address VARCHAR(500) DEFAULT NULL,
     priority VARCHAR(20) DEFAULT 'medium',
     status VARCHAR(50) DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+-- Run these if the table already exists and you need to add columns:
+-- ALTER TABLE complaints ADD COLUMN image_path VARCHAR(500) DEFAULT NULL AFTER description;
+-- ALTER TABLE complaints ADD COLUMN latitude DECIMAL(10,6) DEFAULT NULL AFTER image_path;
+-- ALTER TABLE complaints ADD COLUMN longitude DECIMAL(10,6) DEFAULT NULL AFTER latitude;
+-- ALTER TABLE complaints ADD COLUMN address VARCHAR(500) DEFAULT NULL AFTER longitude;

@@ -41,8 +41,10 @@ $result = $conn->query($sql);
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Photo</th>
                             <th>Title</th>
                             <th>Department</th>
+                            <th>Location</th>
                             <th>Status</th>
                             <th>Date</th>
                         </tr>
@@ -51,8 +53,24 @@ $result = $conn->query($sql);
                         <?php while ($c = $result->fetch_assoc()): ?>
                         <tr>
                             <td>#<?php echo $c['id']; ?></td>
+                            <td>
+                                <?php if (!empty($c['image_path'])): ?>
+                                    <img src="../<?php echo htmlspecialchars($c['image_path']); ?>" alt="Issue photo" class="complaint-image-thumb" onclick="window.open('../<?php echo htmlspecialchars($c['image_path']); ?>', '_blank')">
+                                <?php else: ?>
+                                    <span style="color:var(--gray-light);font-size:0.85rem;">No photo</span>
+                                <?php endif; ?>
+                            </td>
                             <td><?php echo htmlspecialchars($c['title']); ?></td>
                             <td><span class="badge dept-<?php echo $c['department']; ?>"><?php echo ucfirst($c['department']); ?></span></td>
+                            <td>
+                                <?php if (!empty($c['latitude']) && !empty($c['longitude'])): ?>
+                                    <span class="complaint-location-tag">
+                                        📍 <?php echo number_format($c['latitude'], 4); ?>, <?php echo number_format($c['longitude'], 4); ?>
+                                    </span>
+                                <?php else: ?>
+                                    <span style="color:var(--gray-light);font-size:0.85rem;">—</span>
+                                <?php endif; ?>
+                            </td>
                             <td><span class="badge status-<?php echo $c['status']; ?>"><?php echo ucfirst(str_replace('_', ' ', $c['status'])); ?></span></td>
                             <td><?php echo date('d M Y', strtotime($c['created_at'])); ?></td>
                         </tr>
@@ -60,7 +78,7 @@ $result = $conn->query($sql);
                     </tbody>
                 </table>
                 <?php if ($result->num_rows == 0): ?>
-                    <p class="no-issues">No complaints found.</p>
+                    <p class="no-issues">No complaints found. <a href="submit_issue.php">Report your first issue!</a></p>
                 <?php endif; ?>
             </div>
         </div>
