@@ -5,24 +5,38 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+require_once __DIR__ . '/../backend/config/db.php';
+
 $profileDir = __DIR__ . '/../uploads/profiles';
 if (!is_dir($profileDir)) {
     mkdir($profileDir, 0755, true);
 }
 
+$user_id = $_SESSION['user_id'];
 $message = '';
 $error = '';
+$profileImage = '../assets/default-avatar.svg';
+$phone = '';
+$address = '';
+$displayName = $_SESSION['name'] ?? '';
+
+$stmt = $conn->prepare("SELECT name, phone, address, profile_image FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result && $row = $result->fetch_assoc()) {
+    $displayName = $row['name'] ?: $displayName;
+    $phone = $row['phone'] ?? '';
+    $address = $row['address'] ?? '';
+    $profileImage = $row['profile_image'] ? $row['profile_image'] : $profileImage;
+}
+$stmt->close();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $displayName = trim($_POST['display_name'] ?? '');
+    $displayName = trim($_POST['display_name'] ?? $displayName);
     $phone = trim($_POST['phone'] ?? '');
     $address = trim($_POST['address'] ?? '');
-
-    if ($displayName !== '') {
-        $_SESSION['name'] = $displayName;
-    }
-    $_SESSION['profile_phone'] = $phone;
-    $_SESSION['profile_address'] = $address;
+    $profileImagePath = $profileImage;
 
     if (!empty($_FILES['profile_image']['name']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
         $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -30,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($allowed[$mime])) {
             $error = 'Only JPG, PNG, or WEBP images are allowed.';
         } else {
-            $fileName = 'user_' . $_SESSION['user_id'] . '_' . time() . '.' . $allowed[$mime];
+            $fileName = 'user_' . $user_id . '_' . time() . '.' . $allowed[$mime];
             $targetPath = $profileDir . '/' . $fileName;
             if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetPath)) {
-                $_SESSION['profile_image'] = '../uploads/profiles/' . $fileName;
+                $profileImagePath = 'uploads/profiles/' . $fileName;
             } else {
                 $error = 'Profile image upload failed. Please try again.';
             }
@@ -41,11 +55,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($error === '') {
-        $message = 'Profile updated successfully.';
+        $stmt = $conn->prepare("UPDATE users SET name = ?, phone = ?, address = ?, profile_image = ? WHERE id = ?");
+        $stmt->bind_param("ssssi", $displayName, $phone, $address, $profileImagePath, $user_id);
+        if ($stmt->execute()) {
+            $_SESSION['name'] = $displayName;
+            $profileImage = $profileImagePath;
+            $message = 'Profile updated successfully.';
+        } else {
+            $error = 'Unable to save profile details. Please try again.';
+        }
+        $stmt->close();
     }
 }
 
-$profileImage = $_SESSION['profile_image'] ?? '../assets/default-avatar.svg';
+if (!empty($profileImage)) {
+    $profileImage = $profileImage;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,17 +117,17 @@ $profileImage = $_SESSION['profile_image'] ?? '../assets/default-avatar.svg';
 
                 <div class="form-group">
                     <label for="display_name">Name</label>
-                    <input id="display_name" type="text" name="display_name" value="<?php echo htmlspecialchars($_SESSION['name'] ?? ''); ?>" required>
+                    <input id="display_name" type="text" name="display_name" value="<?php echo htmlspecialchars($displayName); ?>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input id="phone" type="text" name="phone" value="<?php echo htmlspecialchars($_SESSION['profile_phone'] ?? ''); ?>" placeholder="Optional">
+                    <input id="phone" type="text" name="phone" value="<?php echo htmlspecialchars($phone); ?>" placeholder="Optional">
                 </div>
 
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea id="address" name="address" rows="4" placeholder="Optional"><?php echo htmlspecialchars($_SESSION['profile_address'] ?? ''); ?></textarea>
+                    <textarea id="address" name="address" rows="4" placeholder="Optional"><?php echo htmlspecialchars($address); ?></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary">Save Profile</button>

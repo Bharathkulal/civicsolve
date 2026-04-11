@@ -8,7 +8,10 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role ENUM('user','admin','super_admin') DEFAULT 'user',
-    department VARCHAR(50) DEFAULT NULL
+    department VARCHAR(50) DEFAULT NULL,
+    phone VARCHAR(20) DEFAULT NULL,
+    address VARCHAR(500) DEFAULT NULL,
+    profile_image VARCHAR(500) DEFAULT NULL
 );
 
 -- COMPLAINTS TABLE

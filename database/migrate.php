@@ -10,6 +10,9 @@ $queries = [
     "ALTER TABLE complaints ADD COLUMN IF NOT EXISTS latitude DECIMAL(10,6) DEFAULT NULL AFTER image_path",
     "ALTER TABLE complaints ADD COLUMN IF NOT EXISTS longitude DECIMAL(10,6) DEFAULT NULL AFTER latitude",
     "ALTER TABLE complaints ADD COLUMN IF NOT EXISTS address VARCHAR(500) DEFAULT NULL AFTER longitude",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20) DEFAULT NULL AFTER department",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS address VARCHAR(500) DEFAULT NULL AFTER phone",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_image VARCHAR(500) DEFAULT NULL AFTER address"
 ];
 
 echo "<h2>CivicSolve — Database Migration</h2>";
