@@ -6,12 +6,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin' || $_SESSION['
 }
 require_once __DIR__ . '/../../backend/config/db.php';
 $dept = 'road';
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM complaints WHERE department = ? AND priority = 'high'");
-$stmt->execute([$dept]);
-$high = $stmt->fetchColumn();
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM complaints WHERE department = ? AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)");
-$stmt->execute([$dept]);
-$week = $stmt->fetchColumn();
+$high = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND priority = 'high'")->fetch_row()[0];
+$week = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)")->fetch_row()[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +16,7 @@ $week = $stmt->fetchColumn();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Road Analytics - CivicSolve</title>
     <link rel="stylesheet" href="../admin.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -44,5 +41,6 @@ $week = $stmt->fetchColumn();
             </div>
         </div>
     </div>
+    <script src="../../assets/js/theme-toggle.js"></script>
 </body>
 </html>

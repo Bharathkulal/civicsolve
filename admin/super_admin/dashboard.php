@@ -9,14 +9,12 @@ require_once __DIR__ . '/../../backend/config/db.php';
 $dept_stats = [];
 $depts = ['road', 'garbage', 'water', 'electricity'];
 foreach ($depts as $dept) {
-    $total = $pdo->prepare("SELECT COUNT(*) FROM complaints WHERE department = ?");
-    $total->execute([$dept]);
-    $resolved = $pdo->prepare("SELECT COUNT(*) FROM complaints WHERE department = ? AND status = 'resolved'");
-    $resolved->execute([$dept]);
-    $dept_stats[$dept] = ['total' => $total->fetchColumn(), 'resolved' => $resolved->fetchColumn()];
+    $total = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept'")->fetch_row()[0];
+    $resolved = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'resolved'")->fetch_row()[0];
+    $dept_stats[$dept] = ['total' => $total, 'resolved' => $resolved];
 }
 
-$all_admins = $pdo->query("SELECT * FROM users WHERE role = 'admin' ORDER BY department")->fetchAll(PDO::FETCH_ASSOC);
+$all_admins = $conn->query("SELECT * FROM users WHERE role = 'admin' ORDER BY department")->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +23,7 @@ $all_admins = $pdo->query("SELECT * FROM users WHERE role = 'admin' ORDER BY dep
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics - CivicSolve</title>
     <link rel="stylesheet" href="../admin.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -81,5 +80,6 @@ $all_admins = $pdo->query("SELECT * FROM users WHERE role = 'admin' ORDER BY dep
             </table>
         </div>
     </div>
+    <script src="../../assets/js/theme-toggle.js"></script>
 </body>
 </html>

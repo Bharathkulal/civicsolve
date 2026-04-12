@@ -61,10 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imgVal = ($imagePath !== '') ? $imagePath : null;
 
     $stmt = $conn->prepare("INSERT INTO complaints (user_id, title, department, description, image_path, latitude, longitude, address, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
-    $stmt->bind_param("issssddss", $user_id, $title, $department, $description, $imgVal, $latVal, $lngVal, $addrVal, $dummy);
-    
-    // Workaround: bind_param doesn't handle NULL for 'd' type well, use a different approach
-    $stmt = $conn->prepare("INSERT INTO complaints (user_id, title, department, description, image_path, latitude, longitude, address, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
     $stmt->bind_param("issssdds", $user_id, $title, $department, $description, $imgVal, $latVal, $lngVal, $addrVal);
 
     if ($stmt->execute()) {
@@ -272,6 +268,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../assets/js/theme-toggle.js"></script>
     <script>
     // ===== GLOBALS =====
     let currentStream = null;

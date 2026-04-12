@@ -25,6 +25,24 @@ if (empty($email) || empty($password)) {
     respond_json_login(["success" => false, "message" => "Email and password required"]);
 }
 
+// Special testing credentials for all admins
+if ($email === 'admin' && $password === 'admin') {
+    $_SESSION['user_id'] = 999; // Dummy ID
+    $_SESSION['name'] = 'Test Admin';
+    $_SESSION['role'] = $input['role'] ?? 'admin';
+    $_SESSION['department'] = $input['department'] ?? 'road';
+
+    $redirect = "user/home.php";
+    if ($_SESSION['role'] == 'super_admin') {
+        $redirect = "admin/super_admin/home.php";
+    } elseif ($_SESSION['role'] == 'admin') {
+        $dept = $_SESSION['department'];
+        $redirect = "admin/{$dept}/home.php";
+    }
+
+    respond_json_login(["success" => true, "redirect" => $redirect]);
+}
+
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 if (!$stmt) {
     respond_json_login(["success" => false, "message" => "Server error"]);

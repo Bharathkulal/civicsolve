@@ -6,23 +6,25 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'super_admin') {
 }
 require_once __DIR__ . '/../../backend/config/db.php';
 
-$users = $pdo->query("SELECT * FROM users ORDER BY created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
+$users = $conn->query("SELECT * FROM users ORDER BY created_at DESC")->fetch_all(MYSQLI_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_admin'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $department = $_POST['department'];
-    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role, department) VALUES (?, ?, ?, 'admin', ?)");
-    $stmt->execute([$name, $email, $password, $department]);
+    $stmt = $conn->prepare("INSERT INTO users (name, email, password, role, department) VALUES (?, ?, ?, 'admin', ?)");
+    $stmt->bind_param("ssss", $name, $email, $password, $department);
+    $stmt->execute();
     header('Location: manage_users.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     $id = $_POST['id'];
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ? AND role != 'super_admin'");
-    $stmt->execute([$id]);
+    $stmt = $conn->prepare("DELETE FROM users WHERE id = ? AND role != 'super_admin'");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
     header('Location: manage_users.php');
     exit;
 }
@@ -34,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users - CivicSolve</title>
     <link rel="stylesheet" href="../admin.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>

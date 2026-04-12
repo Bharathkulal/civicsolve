@@ -185,6 +185,9 @@ body {
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s;
+    display: inline-block;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .btn-secondary:hover {

@@ -1,0 +1,317 @@
+:root {
+    --theme-bg: #f3f4f6;
+    --theme-surface: #ffffff;
+    --theme-surface-soft: #f8fafc;
+    --theme-text: #111827;
+    --theme-muted: #6b7280;
+    --theme-border: rgba(148,163,184,0.24);
+    --theme-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    --theme-panel: rgba(255,255,255,0.85);
+    --theme-toggle-bg: rgba(255,255,255,0.92);
+    --theme-toggle-color: #111827;
+    --theme-toggle-border: rgba(148,163,184,0.4);
+}
+
+html.dark-mode {
+    color-scheme: dark;
+}
+
+html.dark-mode, body.dark-mode {
+    background: #0b1120 !important;
+    color: #e5e7eb !important;
+}
+
+html.dark-mode .navbar,
+body.dark-mode .navbar,
+html.dark-mode .entry-card,
+body.dark-mode .entry-card,
+html.dark-mode .card,
+body.dark-mode .card,
+html.dark-mode .feature-card,
+body.dark-mode .feature-card,
+html.dark-mode .right-section,
+body.dark-mode .right-section,
+html.dark-mode .login-form-wrapper,
+body.dark-mode .login-form-wrapper,
+html.dark-mode .register-form-wrapper,
+body.dark-mode .register-form-wrapper,
+html.dark-mode .alert,
+body.dark-mode .alert,
+html.dark-mode .form-group,
+body.dark-mode .form-group {
+    background: #111827 !important;
+    color: #e5e7eb !important;
+    border-color: #374151 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35) !important;
+}
+
+html.dark-mode .navbar .nav-links a,
+body.dark-mode .navbar .nav-links a,
+html.dark-mode .user-name,
+body.dark-mode .user-name,
+html.dark-mode .logo,
+body.dark-mode .logo {
+    color: #d1d5db !important;
+}
+
+html.dark-mode .navbar {
+    background: #111827 !important;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.45);
+}
+
+html.dark-mode .btn-nav,
+body.dark-mode .btn-nav {
+    background: #1f2937 !important;
+    color: #e5e7eb !important;
+    border-color: rgba(148,163,184,0.4) !important;
+}
+
+html.dark-mode .btn-primary,
+body.dark-mode .btn-primary,
+html.dark-mode button,
+body.dark-mode button,
+html.dark-mode .btn,
+body.dark-mode .btn,
+html.dark-mode .btn-small,
+body.dark-mode .btn-small {
+    background: #4338ca !important;
+    border-color: #3730a3 !important;
+    color: #ffffff !important;
+}
+
+html.dark-mode .btn-secondary,
+body.dark-mode .btn-secondary {
+    background: transparent !important;
+    color: #c7d2fe !important;
+    border-color: #93c5fd !important;
+}
+
+html.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-secondary:hover {
+    background: #4f46e5 !important;
+    color: #ffffff !important;
+}
+
+html.dark-mode .btn-primary:hover,
+body.dark-mode .btn-primary:hover,
+html.dark-mode .btn-small:hover,
+body.dark-mode .btn-small:hover {
+    background: #6366f1 !important;
+    border-color: #4f46e5 !important;
+    color: #ffffff !important;
+}
+
+html.dark-mode .btn-danger,
+body.dark-mode .btn-danger {
+    background: #dc2626 !important;
+    border-color: #b91c1c !important;
+    color: #ffffff !important;
+}
+
+html.dark-mode .btn-danger:hover,
+body.dark-mode .btn-danger:hover {
+    background: #ef4444 !important;
+    border-color: #f87171 !important;
+}
+
+html.dark-mode input,
+body.dark-mode input,
+html.dark-mode textarea,
+body.dark-mode textarea,
+html.dark-mode select,
+body.dark-mode select {
+    background: #0f172a !important;
+    color: #e5e7eb !important;
+    border-color: #334155 !important;
+}
+
+html.dark-mode ::placeholder,
+body.dark-mode ::placeholder {
+    color: #94a3b8 !important;
+}
+
+html.dark-mode .hero,
+body.dark-mode .hero,
+html.dark-mode .features,
+body.dark-mode .features,
+html.dark-mode .stats,
+body.dark-mode .stats,
+html.dark-mode .dashboard,
+body.dark-mode .dashboard,
+html.dark-mode .profile-page,
+body.dark-mode .profile-page,
+html.dark-mode .view-status,
+body.dark-mode .view-status,
+html.dark-mode .admin-dashboard,
+body.dark-mode .admin-dashboard {
+    background: #0b1120 !important;
+}
+
+html.dark-mode .hero h1,
+body.dark-mode .hero h1,
+html.dark-mode .hero p,
+body.dark-mode .hero p,
+html.dark-mode .feature-card h3,
+body.dark-mode .feature-card h3,
+html.dark-mode .feature-card p,
+body.dark-mode .feature-card p,
+html.dark-mode .stat-item,
+body.dark-mode .stat-item,
+html.dark-mode .issue-card,
+body.dark-mode .issue-card,
+html.dark-mode .admin-dashboard h1,
+body.dark-mode .admin-dashboard h1,
+html.dark-mode .admin-dashboard h2,
+body.dark-mode .admin-dashboard h2,
+html.dark-mode .admin-dashboard p,
+body.dark-mode .admin-dashboard p,
+html.dark-mode .admin-table th,
+body.dark-mode .admin-table th,
+html.dark-mode .admin-table td,
+body.dark-mode .admin-table td,
+html.dark-mode .complaints-table th,
+body.dark-mode .complaints-table th,
+html.dark-mode .complaints-table td,
+body.dark-mode .complaints-table td {
+    color: #e5e7eb !important;
+}
+
+html.dark-mode .admin-table,
+body.dark-mode .admin-table,
+html.dark-mode .complaints-table,
+body.dark-mode .complaints-table,
+html.dark-mode .admin-table table,
+body.dark-mode .admin-table table,
+html.dark-mode .complaints-table table,
+body.dark-mode .complaints-table table,
+html.dark-mode .add-admin-form,
+body.dark-mode .add-admin-form,
+html.dark-mode .update-form,
+body.dark-mode .update-form,
+html.dark-mode .dept-card,
+body.dark-mode .dept-card,
+html.dark-mode .stat-card,
+body.dark-mode .stat-card {
+    background: #111827 !important;
+    border-color: #374151 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35) !important;
+}
+
+html.dark-mode .admin-table th,
+body.dark-mode .admin-table th,
+html.dark-mode .complaints-table th,
+body.dark-mode .complaints-table th {
+    background: #1f2937 !important;
+    border-bottom-color: #334155 !important;
+}
+
+html.dark-mode .admin-table td,
+body.dark-mode .admin-table td,
+html.dark-mode .complaints-table td,
+body.dark-mode .complaints-table td {
+    border-bottom-color: #334155 !important;
+}
+
+html.dark-mode .admin-table tr:hover,
+body.dark-mode .admin-table tr:hover,
+html.dark-mode .complaints-table tr:hover,
+body.dark-mode .complaints-table tr:hover {
+    background: #111827 !important;
+}
+
+html.dark-mode .add-admin-form input,
+body.dark-mode .add-admin-form input,
+html.dark-mode .add-admin-form select,
+body.dark-mode .add-admin-form select,
+html.dark-mode .update-form select,
+body.dark-mode .update-form select {
+    background: #0f172a !important;
+    color: #e5e7eb !important;
+    border-color: #334155 !important;
+}
+
+html.dark-mode .badge,
+body.dark-mode .badge {
+    background: rgba(255,255,255,0.08) !important;
+    color: #e5e7eb !important;
+}
+
+html.dark-mode .btn-nav,
+body.dark-mode .btn-nav {
+    background: #1f2937 !important;
+    color: #e5e7eb !important;
+    border-color: #4b5563 !important;
+}
+
+html.dark-mode .admin-links,
+body.dark-mode .admin-links {
+    background: #111827 !important;
+}
+
+html.dark-mode .admin-card,
+body.dark-mode .admin-card {
+    background: #1f2937 !important;
+    color: #e5e7eb !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35) !important;
+}
+
+html.dark-mode .admin-card:hover,
+body.dark-mode .admin-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.5) !important;
+}
+
+html.dark-mode .admin-dashboard h1,
+body.dark-mode .admin-dashboard h1,
+html.dark-mode .admin-dashboard h2,
+body.dark-mode .admin-dashboard h2 {
+    color: #f8fafc !important;
+}
+
+html.dark-mode .form-group label,
+body.dark-mode .form-group label,
+html.dark-mode label,
+body.dark-mode label {
+    color: #d1d5db !important;
+}
+
+html.dark-mode .login-form-wrapper h1,
+body.dark-mode .login-form-wrapper h1,
+html.dark-mode .register-form-wrapper h1,
+body.dark-mode .register-form-wrapper h1,
+html.dark-mode .login-form-wrapper p,
+body.dark-mode .login-form-wrapper p,
+html.dark-mode .register-form-wrapper p,
+body.dark-mode .register-form-wrapper p {
+    color: #e5e7eb !important;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 2000;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 1px solid var(--theme-toggle-border);
+    background: var(--theme-toggle-bg);
+    color: var(--theme-toggle-color);
+    font-size: 1.2rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+}
+
+html.dark-mode .theme-toggle,
+body.dark-mode .theme-toggle {
+    background: rgba(255,255,255,0.08);
+    color: #f8fafc;
+    border-color: rgba(255,255,255,0.18);
+}

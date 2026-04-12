@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' && ($_SESSION['department'] ?? '') === 'electricity') {
-    header('Location: ../admin/electricity/home.php');
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' && ($_SESSION['department'] ?? '') === 'water') {
+    header('Location: ../admin/water/home.php');
     exit;
 }
 
@@ -12,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password'] ?? '');
 
     if ($username === 'admin' && $password === 'admin') {
-        $_SESSION['user_id'] = 1001;
-        $_SESSION['name'] = 'Electricity Admin';
+        $_SESSION['user_id'] = 1004;
+        $_SESSION['name'] = 'Water Admin';
         $_SESSION['role'] = 'admin';
-        $_SESSION['department'] = 'electricity';
-        header('Location: ../admin/electricity/home.php');
+        $_SESSION['department'] = 'water';
+        header('Location: ../admin/water/home.php');
         exit;
     }
     $error = 'Invalid credentials. Use admin / admin.';
@@ -27,15 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electricity Admin Login</title>
+    <title>Water Admin Login</title>
     <link rel="stylesheet" href="../assets/css/admin-entry.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <main class="entry-card">
-        <h1>Electricity Admin</h1>
-        <p>Sign in to manage electricity complaints.</p>
+        <h1>Water Admin</h1>
+        <p>Sign in to manage water complaints.</p>
         <?php if ($error): ?><div class="alert"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
         <form method="POST">
             <div class="form-group">
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="password">Password</label>
                 <input id="password" name="password" type="password" required>
             </div>
-            <input type="hidden" name="department" value="electricity">
+            <input type="hidden" name="department" value="water">
             <button type="submit">Login</button>
         </form>
         <p class="hint">Default credentials: admin / admin</p>
