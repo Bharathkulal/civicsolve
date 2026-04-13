@@ -19,6 +19,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="user.css">
     <link rel="stylesheet" href="../assets/css/theme.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
@@ -56,7 +57,10 @@ $result = $conn->query($sql);
                             <td>#<?php echo $c['id']; ?></td>
                             <td>
                                 <?php if (!empty($c['image_path'])): ?>
-                                    <img src="../<?php echo htmlspecialchars($c['image_path']); ?>" alt="Issue photo" class="complaint-image-thumb" onclick="window.open('../<?php echo htmlspecialchars($c['image_path']); ?>', '_blank')">
+                                    <img src="../<?php echo htmlspecialchars($c['image_path']); ?>" 
+                                         alt="Issue photo" 
+                                         class="complaint-image-thumb" 
+                                         onclick="openLightbox('../<?php echo htmlspecialchars($c['image_path']); ?>', '<?php echo htmlspecialchars($c['title']); ?>')">
                                 <?php else: ?>
                                     <span style="color:var(--gray-light);font-size:0.85rem;">No photo</span>
                                 <?php endif; ?>
@@ -84,6 +88,72 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="image-lightbox" id="imageLightbox" onclick="closeLightboxOutside(event)">
+        <div class="lightbox-toolbar">
+            <button class="lightbox-back" onclick="closeLightbox()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back</span>
+            </button>
+            <span class="lightbox-info" id="lightboxTitle"></span>
+            <div class="lightbox-actions">
+                <button class="lightbox-action-btn" onclick="downloadImage()" title="Download">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="lightbox-action-btn" onclick="openNewTab()" title="Open in new tab">
+                    <i class="fas fa-external-link-alt"></i>
+                </button>
+                <button class="lightbox-action-btn" onclick="closeLightbox()" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="lightbox-image-wrap" onclick="event.stopPropagation()">
+            <img id="lightboxImage" src="" alt="Complaint photo">
+        </div>
+    </div>
+
     <script src="../assets/js/theme-toggle.js"></script>
+    <script>
+        let currentImageSrc = '';
+
+        function openLightbox(src, title) {
+            currentImageSrc = src;
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightboxTitle').textContent = title || 'Issue Photo';
+            document.getElementById('imageLightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('imageLightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeLightboxOutside(e) {
+            if (e.target === document.getElementById('imageLightbox')) {
+                closeLightbox();
+            }
+        }
+
+        function downloadImage() {
+            const a = document.createElement('a');
+            a.href = currentImageSrc;
+            a.download = currentImageSrc.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function openNewTab() {
+            window.open(currentImageSrc, '_blank');
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 </body>
 </html>
