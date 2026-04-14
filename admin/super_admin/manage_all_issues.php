@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
                         <td><?php echo htmlspecialchars($c['title']); ?></td>
                         <td>
                             <?php if (!empty($c['image_path'])): ?>
-                                <img src="../../../<?php echo htmlspecialchars($c['image_path']); ?>" alt="Issue" style="width:80px;height:60px;object-fit:cover;cursor:pointer;border-radius:5px;" onclick="window.open('../../../<?php echo htmlspecialchars($c['image_path']); ?>', '_blank')">
+                                <img src="../../../<?php echo htmlspecialchars($c['image_path']); ?>" alt="Issue" style="width:80px;height:60px;object-fit:cover;cursor:pointer;border-radius:5px;" onclick="window.location.href='../../view_image.php?file=<?php echo urlencode(basename($c['image_path'])); ?>'">
                             <?php else: ?>
                                 <span style="color:var(--gray);font-size:0.8rem;">No photo</span>
                             <?php endif; ?>

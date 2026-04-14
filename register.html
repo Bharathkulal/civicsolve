@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CivicSolve - Create Account</title>
-    <meta name="description" content="Join CivicSolve - AI-powered civic complaint management platform. Sign up to report and track civic issues.">
+    <meta name="description" content="Join CivicSolve - AI-powered civic complaint management platform">
     <link rel="stylesheet" href="assets/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -42,18 +42,6 @@
                     <div class="pill"><i class="fas fa-shield-alt"></i> Secure</div>
                 </div>
 
-                <!-- Trust Badges -->
-                <div class="trust-section">
-                    <div class="trust-avatars">
-                        <div class="avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">A</div>
-                        <div class="avatar" style="background: linear-gradient(135deg, #06b6d4, #34d399);">R</div>
-                        <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">K</div>
-                        <div class="avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">S</div>
-                        <div class="avatar avatar-more">+2K</div>
-                    </div>
-                    <p class="trust-text">Joined by <strong>2,500+</strong> active citizens this month</p>
-                </div>
-
                 <div class="stats-row">
                     <div class="stat">
                         <span class="stat-num">25K+</span>
@@ -76,27 +64,9 @@
         <!-- Right Form Card -->
         <div class="form-side">
             <div class="glass-card" id="glass-card">
-                <!-- Progress Steps -->
-                <div class="step-indicator">
-                    <div class="step active" id="step-1-dot">
-                        <div class="step-circle">1</div>
-                        <span>Details</span>
-                    </div>
-                    <div class="step-line" id="step-line-1"></div>
-                    <div class="step" id="step-2-dot">
-                        <div class="step-circle">2</div>
-                        <span>Security</span>
-                    </div>
-                    <div class="step-line" id="step-line-2"></div>
-                    <div class="step" id="step-3-dot">
-                        <div class="step-circle">3</div>
-                        <span>Confirm</span>
-                    </div>
-                </div>
-
                 <div class="card-header">
-                    <h2 id="step-title">Create your account</h2>
-                    <p id="step-subtitle">Start reporting civic issues in minutes</p>
+                    <h2>Create your account</h2>
+                    <p>Start reporting civic issues in minutes</p>
                 </div>
 
                 <!-- Error/Success Messages -->
@@ -104,157 +74,57 @@
                 <div id="register-success" class="alert alert-success" style="display:none;"></div>
 
                 <form id="register-form" class="auth-form">
-                    <!-- Step 1: Personal Info -->
-                    <div class="form-step" id="form-step-1">
-                        <div class="field">
-                            <label for="name">Full Name</label>
-                            <div class="input-wrap">
-                                <i class="fas fa-user"></i>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
-                                <span class="input-check" id="name-check"><i class="fas fa-check-circle"></i></span>
-                            </div>
+                    <div class="field">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
                         </div>
-
-                        <div class="field">
-                            <label for="email">Email Address</label>
-                            <div class="input-wrap">
-                                <i class="fas fa-envelope"></i>
-                                <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
-                                <span class="input-check" id="email-check"><i class="fas fa-check-circle"></i></span>
-                            </div>
-                            <span class="field-hint"><i class="fas fa-info-circle"></i> We'll send a verification link</span>
-                        </div>
-
-                        <div class="field">
-                            <label for="phone">Phone Number <span class="optional">(Optional)</span></label>
-                            <div class="input-wrap">
-                                <i class="fas fa-phone"></i>
-                                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
-                            </div>
-                        </div>
-
-                        <button type="button" class="submit-btn next-btn" id="next-step-1" onclick="nextStep(2)">
-                            <span>Continue</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
                     </div>
 
-                    <!-- Step 2: Password & Security -->
-                    <div class="form-step hidden" id="form-step-2">
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="two-col">
                         <div class="field">
-                            <label for="password">Create Password</label>
+                            <label for="password">Password</label>
                             <div class="input-wrap">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" id="password" name="password" placeholder="Min. 8 characters" required autocomplete="new-password">
+                                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
                                 <button type="button" class="eye-btn" onclick="togglePassword('password')">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <!-- Password Strength Meter -->
-                            <div class="strength-meter" id="strength-meter">
-                                <div class="strength-bars">
-                                    <div class="bar" id="bar-1"></div>
-                                    <div class="bar" id="bar-2"></div>
-                                    <div class="bar" id="bar-3"></div>
-                                    <div class="bar" id="bar-4"></div>
-                                </div>
-                                <span class="strength-label" id="strength-label">Enter a password</span>
-                            </div>
-                            <!-- Password Requirements -->
-                            <div class="pw-requirements">
-                                <div class="pw-req" id="req-length"><i class="fas fa-circle"></i> 8+ characters</div>
-                                <div class="pw-req" id="req-upper"><i class="fas fa-circle"></i> Uppercase letter</div>
-                                <div class="pw-req" id="req-number"><i class="fas fa-circle"></i> Number</div>
-                                <div class="pw-req" id="req-special"><i class="fas fa-circle"></i> Special character</div>
-                            </div>
                         </div>
-
                         <div class="field">
-                            <label for="confirm_password">Confirm Password</label>
+                            <label for="confirm_password">Confirm</label>
                             <div class="input-wrap">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required autocomplete="new-password">
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required autocomplete="new-password">
                                 <button type="button" class="eye-btn" onclick="togglePassword('confirm_password')">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <span class="match-indicator hidden" id="match-indicator">
-                                <i class="fas fa-check-circle"></i> Passwords match
-                            </span>
-                            <span class="mismatch-indicator hidden" id="mismatch-indicator">
-                                <i class="fas fa-times-circle"></i> Passwords don't match
-                            </span>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="back-btn" onclick="prevStep(1)">
-                                <i class="fas fa-arrow-left"></i>
-                                <span>Back</span>
-                            </button>
-                            <button type="button" class="submit-btn next-btn flex-grow" id="next-step-2" onclick="nextStep(3)">
-                                <span>Continue</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Step 3: Confirm & Submit -->
-                    <div class="form-step hidden" id="form-step-3">
-                        <!-- Review Summary -->
-                        <div class="review-card">
-                            <div class="review-header">
-                                <i class="fas fa-clipboard-check"></i>
-                                <span>Review Your Details</span>
-                            </div>
-                            <div class="review-items">
-                                <div class="review-item">
-                                    <span class="review-label">Name</span>
-                                    <span class="review-value" id="review-name">—</span>
-                                </div>
-                                <div class="review-item">
-                                    <span class="review-label">Email</span>
-                                    <span class="review-value" id="review-email">—</span>
-                                </div>
-                                <div class="review-item">
-                                    <span class="review-label">Password</span>
-                                    <span class="review-value">••••••••</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="terms">
-                            <label class="checkbox-wrap" id="terms-label">
-                                <input type="checkbox" id="terms" name="terms" required>
-                                <span class="checkmark"></span>
-                                <span class="terms-text">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></span>
-                            </label>
-                        </div>
-
-                        <div class="terms">
-                            <label class="checkbox-wrap" id="newsletter-label">
-                                <input type="checkbox" id="newsletter" name="newsletter" checked>
-                                <span class="checkmark"></span>
-                                <span class="terms-text">Send me product updates and tips</span>
-                            </label>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="back-btn" onclick="prevStep(2)">
-                                <i class="fas fa-arrow-left"></i>
-                                <span>Back</span>
-                            </button>
-                            <button type="submit" class="submit-btn flex-grow" id="register-btn">
-                                <span>Create Account</span>
-                                <i class="fas fa-rocket"></i>
-                            </button>
-                        </div>
-
-                        <!-- Security Badge -->
-                        <div class="security-badge">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Your data is protected with 256-bit SSL encryption</span>
-                        </div>
+                    <div class="terms">
+                        <label class="checkbox-wrap">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            <span class="terms-text">I agree to the <a href="#">Terms</a> & <a href="#">Privacy Policy</a></span>
+                        </label>
                     </div>
+
+                    <button type="submit" class="submit-btn" id="register-btn">
+                        <span>Create Account</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
 
                 <div class="card-footer">
@@ -266,207 +136,6 @@
 
     <script src="assets/js/auth.js"></script>
     <script>
-        /* =============================================
-           Multi-Step Form Logic
-           ============================================= */
-        let currentStep = 1;
-
-        function nextStep(step) {
-            // Validation before moving forward
-            if (currentStep === 1) {
-                const name = document.getElementById('name');
-                const email = document.getElementById('email');
-                if (!name.value.trim()) {
-                    name.focus();
-                    shakeField(name.closest('.input-wrap'));
-                    return;
-                }
-                if (!email.value.trim() || !email.validity.valid) {
-                    email.focus();
-                    shakeField(email.closest('.input-wrap'));
-                    return;
-                }
-            }
-            if (currentStep === 2) {
-                const pw = document.getElementById('password');
-                const cpw = document.getElementById('confirm_password');
-                if (pw.value.length < 8) {
-                    pw.focus();
-                    shakeField(pw.closest('.input-wrap'));
-                    return;
-                }
-                if (pw.value !== cpw.value) {
-                    cpw.focus();
-                    shakeField(cpw.closest('.input-wrap'));
-                    return;
-                }
-            }
-
-            // Update review if going to step 3
-            if (step === 3) {
-                document.getElementById('review-name').textContent = document.getElementById('name').value;
-                document.getElementById('review-email').textContent = document.getElementById('email').value;
-            }
-
-            switchStep(step);
-        }
-
-        function prevStep(step) {
-            switchStep(step);
-        }
-
-        function switchStep(step) {
-            // Hide current
-            document.getElementById(`form-step-${currentStep}`).classList.add('hidden');
-            document.getElementById(`form-step-${currentStep}`).classList.remove('slide-in');
-
-            // Update step indicators
-            for (let i = 1; i <= 3; i++) {
-                const dot = document.getElementById(`step-${i}-dot`);
-                dot.classList.remove('active', 'completed');
-                if (i < step) dot.classList.add('completed');
-                if (i === step) dot.classList.add('active');
-            }
-
-            // Animate step lines
-            for (let i = 1; i <= 2; i++) {
-                const line = document.getElementById(`step-line-${i}`);
-                if (i < step) {
-                    line.classList.add('filled');
-                } else {
-                    line.classList.remove('filled');
-                }
-            }
-
-            // Update titles
-            const titles = {
-                1: { title: 'Create your account', subtitle: 'Start reporting civic issues in minutes' },
-                2: { title: 'Secure your account', subtitle: 'Create a strong password to protect your data' },
-                3: { title: 'Almost there!', subtitle: 'Review your details and create your account' }
-            };
-            document.getElementById('step-title').textContent = titles[step].title;
-            document.getElementById('step-subtitle').textContent = titles[step].subtitle;
-
-            // Show next
-            currentStep = step;
-            const nextEl = document.getElementById(`form-step-${step}`);
-            nextEl.classList.remove('hidden');
-            setTimeout(() => nextEl.classList.add('slide-in'), 10);
-        }
-
-        function shakeField(el) {
-            el.classList.add('shake');
-            setTimeout(() => el.classList.remove('shake'), 600);
-        }
-
-        /* =============================================
-           Password Strength Meter
-           ============================================= */
-        document.getElementById('password').addEventListener('input', function () {
-            const val = this.value;
-            let score = 0;
-
-            // Check requirements
-            const hasLength = val.length >= 8;
-            const hasUpper = /[A-Z]/.test(val);
-            const hasNumber = /[0-9]/.test(val);
-            const hasSpecial = /[^A-Za-z0-9]/.test(val);
-
-            updateReq('req-length', hasLength);
-            updateReq('req-upper', hasUpper);
-            updateReq('req-number', hasNumber);
-            updateReq('req-special', hasSpecial);
-
-            if (hasLength) score++;
-            if (hasUpper) score++;
-            if (hasNumber) score++;
-            if (hasSpecial) score++;
-
-            const bars = document.querySelectorAll('.strength-meter .bar');
-            const label = document.getElementById('strength-label');
-            const levels = [
-                { text: 'Weak', color: '#ef4444', cls: 'weak' },
-                { text: 'Fair', color: '#f59e0b', cls: 'fair' },
-                { text: 'Good', color: '#06b6d4', cls: 'good' },
-                { text: 'Strong', color: '#34d399', cls: 'strong' }
-            ];
-
-            bars.forEach((b, i) => {
-                if (i < score) {
-                    b.style.background = levels[score - 1].color;
-                    b.classList.add('active');
-                } else {
-                    b.style.background = '';
-                    b.classList.remove('active');
-                }
-            });
-
-            if (val.length === 0) {
-                label.textContent = 'Enter a password';
-                label.style.color = '';
-                bars.forEach(b => { b.style.background = ''; b.classList.remove('active'); });
-            } else {
-                label.textContent = levels[score - 1]?.text || 'Very Weak';
-                label.style.color = levels[score - 1]?.color || '#ef4444';
-            }
-
-            checkPasswordMatch();
-        });
-
-        function updateReq(id, met) {
-            const el = document.getElementById(id);
-            const icon = el.querySelector('i');
-            if (met) {
-                el.classList.add('met');
-                icon.className = 'fas fa-check-circle';
-            } else {
-                el.classList.remove('met');
-                icon.className = 'fas fa-circle';
-            }
-        }
-
-        /* =============================================
-           Password Match Check
-           ============================================= */
-        document.getElementById('confirm_password').addEventListener('input', checkPasswordMatch);
-
-        function checkPasswordMatch() {
-            const pw = document.getElementById('password').value;
-            const cpw = document.getElementById('confirm_password').value;
-            const match = document.getElementById('match-indicator');
-            const mismatch = document.getElementById('mismatch-indicator');
-
-            if (cpw.length === 0) {
-                match.classList.add('hidden');
-                mismatch.classList.add('hidden');
-                return;
-            }
-
-            if (pw === cpw) {
-                match.classList.remove('hidden');
-                mismatch.classList.add('hidden');
-            } else {
-                match.classList.add('hidden');
-                mismatch.classList.remove('hidden');
-            }
-        }
-
-        /* =============================================
-           Input Validation Visual Feedback
-           ============================================= */
-        document.getElementById('name').addEventListener('input', function () {
-            const check = document.getElementById('name-check');
-            check.classList.toggle('visible', this.value.trim().length >= 2);
-        });
-
-        document.getElementById('email').addEventListener('input', function () {
-            const check = document.getElementById('email-check');
-            check.classList.toggle('visible', this.validity.valid && this.value.includes('@'));
-        });
-
-        /* =============================================
-           Toggle Password Visibility
-           ============================================= */
         function togglePassword(fieldId) {
             const input = document.getElementById(fieldId);
             const btn = input.nextElementSibling;
@@ -480,9 +149,7 @@
             }
         }
 
-        /* =============================================
-           Floating Particles
-           ============================================= */
+        // Floating particles
         function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 30; i++) {
@@ -498,17 +165,11 @@
             }
         }
 
-        /* =============================================
-           Init
-           ============================================= */
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             setTimeout(() => {
                 document.getElementById('glass-card').classList.add('visible');
             }, 200);
-
-            // Add slide-in to first step
-            document.getElementById('form-step-1').classList.add('slide-in');
         });
     </script>
 </body>

@@ -31,6 +31,20 @@ CREATE TABLE IF NOT EXISTS complaints (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- MESSAGES TABLE
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    complaint_id INT,
+    sender_id INT,
+    sender_role ENUM('user','admin','super_admin') DEFAULT 'user',
+    department VARCHAR(50),
+    message TEXT NOT NULL,
+    is_read TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (complaint_id) REFERENCES complaints(id),
+    FOREIGN KEY (sender_id) REFERENCES users(id)
+);
+
 -- Run these if the table already exists and you need to add columns:
 -- ALTER TABLE complaints ADD COLUMN image_path VARCHAR(500) DEFAULT NULL AFTER description;
 -- ALTER TABLE complaints ADD COLUMN latitude DECIMAL(10,6) DEFAULT NULL AFTER image_path;

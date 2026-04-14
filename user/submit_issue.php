@@ -64,6 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("issssdds", $user_id, $title, $department, $description, $imgVal, $latVal, $lngVal, $addrVal);
 
     if ($stmt->execute()) {
+        $complaint_id = $stmt->insert_id;
+        $initialMessage = $description !== '' ? $description : 'Issue submitted: ' . $title;
+        $msgStmt = $conn->prepare("INSERT INTO messages (complaint_id, sender_id, sender_role, department, message) VALUES (?, ?, 'user', ?, ?)");
+        if ($msgStmt) {
+            $msgStmt->bind_param("iiss", $complaint_id, $user_id, $department, $initialMessage);
+            $msgStmt->execute();
+            $msgStmt->close();
+        }
         $message = "✅ Issue submitted successfully to <strong>" . ucfirst($department) . "</strong> department!";
         $messageType = 'success';
     } else {

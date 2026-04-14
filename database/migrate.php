@@ -12,7 +12,19 @@ $queries = [
     "ALTER TABLE complaints ADD COLUMN IF NOT EXISTS address VARCHAR(500) DEFAULT NULL AFTER longitude",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20) DEFAULT NULL AFTER department",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS address VARCHAR(500) DEFAULT NULL AFTER phone",
-    "ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_image VARCHAR(500) DEFAULT NULL AFTER address"
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS profile_image VARCHAR(500) DEFAULT NULL AFTER address",
+    "CREATE TABLE IF NOT EXISTS messages (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        complaint_id INT,
+        sender_id INT,
+        sender_role ENUM('user','admin','super_admin') DEFAULT 'user',
+        department VARCHAR(50),
+        message TEXT NOT NULL,
+        is_read TINYINT(1) DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (complaint_id) REFERENCES complaints(id),
+        FOREIGN KEY (sender_id) REFERENCES users(id)
+    )"
 ];
 
 echo "<h2>CivicSolve — Database Migration</h2>";

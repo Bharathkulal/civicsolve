@@ -7,10 +7,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin' || $_SESSION['
 include("../../backend/config/db.php");
 
 $dept = 'road';
-$total = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept'")->fetch_row()[0];
-$pending = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'pending'")->fetch_row()[0];
-$in_progress = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'in_progress'")->fetch_row()[0];
-$resolved = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'resolved'")->fetch_row()[0];
+$total = ($res = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept'")) ? $res->fetch_row()[0] : 0;
+$pending = ($res = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'pending'")) ? $res->fetch_row()[0] : 0;
+$in_progress = ($res = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'in_progress'")) ? $res->fetch_row()[0] : 0;
+$resolved = ($res = $conn->query("SELECT COUNT(*) FROM complaints WHERE department = '$dept' AND status = 'resolved'")) ? $res->fetch_row()[0] : 0;
+$unread_messages = ($res = $conn->query("SELECT COUNT(*) FROM messages WHERE department = '$dept' AND sender_role = 'user' AND is_read = 0")) ? $res->fetch_row()[0] : 0;
 $result = $conn->query("SELECT c.*, u.name as user_name FROM complaints c LEFT JOIN users u ON c.user_id = u.id WHERE c.department = '$dept' ORDER BY c.created_at DESC LIMIT 20");
 ?>
 <!DOCTYPE html>
@@ -31,6 +32,7 @@ $result = $conn->query("SELECT c.*, u.name as user_name FROM complaints c LEFT J
                 <a href="home.php">Dashboard</a>
                 <a href="dashboard.php">Analytics</a>
                 <a href="manage_issues.php">Issues</a>
+                <a href="messages.php">Messages <?php if($unread_messages > 0): ?><span class="msg-badge"><?php echo $unread_messages; ?></span><?php endif; ?></a>
                 <a href="update_status.php">Update Status</a>
                 <a href="../../../backend/auth/logout.php" class="btn-nav">Logout</a>
             </div>
@@ -44,6 +46,11 @@ $result = $conn->query("SELECT c.*, u.name as user_name FROM complaints c LEFT J
                 <div class="stat-card"><h3>Pending</h3><span class="stat-number"><?php echo $pending; ?></span></div>
                 <div class="stat-card"><h3>In Progress</h3><span class="stat-number"><?php echo $in_progress; ?></span></div>
                 <div class="stat-card resolved"><h3>Resolved</h3><span class="stat-number"><?php echo $resolved; ?></span></div>
+            </div>
+            <div class="message-panel">
+                <h2>Department Messages</h2>
+                <p>Unread user messages: <strong><?php echo $unread_messages; ?></strong></p>
+                <a href="messages.php" class="btn-nav">Open Message Box</a>
             </div>
             <div class="recent-complaints">
                 <h2>Road Complaints</h2>
